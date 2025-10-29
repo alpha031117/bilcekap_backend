@@ -26,12 +26,26 @@ class TaxpayerCreate(BaseModel):
     id_type: str = Field(..., min_length=1, max_length=50)
     id_value: str = Field(..., min_length=1, max_length=100)
     is_valid: bool = True
+    business_name: Optional[str] = None
+    full_name: Optional[str] = None
+    address_street: Optional[str] = None
+    address_city: Optional[str] = None
+    address_postcode: Optional[str] = None
+    address_state: Optional[str] = None
+    address_country_code: Optional[str] = None
 
 
 class TaxpayerUpdate(BaseModel):
     is_valid: Optional[bool] = None
     id_type: Optional[str] = Field(None, max_length=50)
     id_value: Optional[str] = Field(None, max_length=100)
+    business_name: Optional[str] = None
+    full_name: Optional[str] = None
+    address_street: Optional[str] = None
+    address_city: Optional[str] = None
+    address_postcode: Optional[str] = None
+    address_state: Optional[str] = None
+    address_country_code: Optional[str] = None
 
 
 class TaxpayerInDB(TaxpayerCreate):

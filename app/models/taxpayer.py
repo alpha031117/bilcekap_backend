@@ -11,6 +11,15 @@ class Taxpayer(Base):
     id_type = Column(String(50), nullable=False)
     id_value = Column(String(100), nullable=False)
     is_valid = Column(Boolean, default=True)
+    
+    # Additional profile fields
+    business_name = Column(String(255), nullable=True)
+    full_name = Column(String(255), nullable=True)
+    address_street = Column(String(255), nullable=True)
+    address_city = Column(String(100), nullable=True)
+    address_postcode = Column(String(20), nullable=True)
+    address_state = Column(String(100), nullable=True)
+    address_country_code = Column(String(10), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     

@@ -3,6 +3,7 @@ from typing import Dict, Any, Optional
 from fastapi import HTTPException
 from app.config import settings
 import logging
+from app.services.myinvois_service import myinvois_auth_service
 
 logger = logging.getLogger(__name__)
 
@@ -40,15 +41,13 @@ class LHDNService:
             "idValue": id_value
         }
         
-        # Prepare headers (add authentication if required)
+        # Prepare headers with MyInvois bearer token
+        token = await myinvois_auth_service.get_valid_token()
         headers = {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": f"Bearer {token}"
         }
-        
-        # Add API key if configured
-        if settings.LHDN_API_KEY:
-            headers["Authorization"] = f"Bearer {settings.LHDN_API_KEY}"
         
         try:
             async with httpx.AsyncClient(timeout=self.timeout) as client:

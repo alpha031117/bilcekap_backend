@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.routers import taxpayer
+from app.routers import invois
 from app.core.database import engine, Base
 
 # Create database tables
@@ -16,6 +17,12 @@ app.include_router(
     taxpayer.router,
     prefix="/api/v1.0/taxpayer",
     tags=["taxpayer"]
+)
+
+app.include_router(
+    invois.router,
+    prefix="/api/v1.0/invois",
+    tags=["myinvois"]
 )
 
 @app.get("/")
